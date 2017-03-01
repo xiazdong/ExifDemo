@@ -1,6 +1,8 @@
 package xiazdong.exifdemo.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import java.io.InputStream;
 public class FileUtils {
 
     /**
-     *
+     * 从Asset里读取
      * @param context
      * @param fileName
      * @return
@@ -51,4 +53,15 @@ public class FileUtils {
         }
         return stringBuilder.toString();
     }
+
+    public static Bitmap getBitmapFromFile(byte[] data) {
+        return BitmapFactory.decodeByteArray(data, 0, data.length);
+    }
+
+    public static byte[] getByteArrayFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        return baos.toByteArray();
+    }
+
 }
